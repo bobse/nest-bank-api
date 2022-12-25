@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7.0.5-alpine
+    environment:
+      - REDIS_PASSWORD:redispass
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+    networks:
+      - postgres-compose-network
+
+  db:
+    container_name: postgres-db
+    image: postgres:latest
+    volumes:
+      - ./volumes/postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=bob
+    ports:
+      - '5432:5432'
+
+    networks:
+      - postgres-compose-network
+
+  pgadmin-compose:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    volumes:
+      - ./volumes/pgadmin_data:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'roberto@robertoseba.com'
+      PGADMIN_DEFAULT_PASSWORD: 'bob'
+    ports:
+      - '16543:80'
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+
+networks:
+  postgres-compose-network:
+    driver: bridge
