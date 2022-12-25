@@ -9,3 +9,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String
+  password  String
+  createdAt DateTime  @default(now())
+  lastLogin DateTime?
+  active    Boolean
+  accounts  Account[]
+}
+
+model Account {
+  id           Int           @id @default(autoincrement())
+  User         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int?
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  Account     Account? @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  accountId   Int?
+  description String
+  date        DateTime @default(now())
+  amount      Decimal
+}
