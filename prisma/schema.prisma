@@ -27,6 +27,8 @@ model Account {
   userId       Int
   transactions Transaction[]
   createdAt    DateTime      @default(now())
+
+  @@index([userId])
 }
 
 model Transaction {
@@ -36,4 +38,6 @@ model Transaction {
   description String
   date        DateTime @default(now())
   amount      Decimal
+
+  @@index([accountId])
 }
