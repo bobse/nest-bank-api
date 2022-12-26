@@ -1,20 +1,9 @@
-import { User } from '@src/users/entities/user.entity';
+import { User } from '@src/application/users/entities/user.entity';
 import { User as PrismaUser } from '@prisma/client';
 import { Account as PrismaAccount } from '@prisma/client';
 
 export class PrismaUserMapper {
-  static toPrisma(user: User) {
-    // return {
-    //   name: user.name,
-    //   email: user.email,
-    //   password: user.password,
-    //   active: user.isActive,
-    //   accounts: user.accounts
-    //   accounts: {
-    //     create: {  },
-    //   },
-    // };
-  }
+  // static toPrisma(user: User) {}
   static toDomain(
     prismaUser: PrismaUser & {
       accounts: PrismaAccount[];

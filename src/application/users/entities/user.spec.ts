@@ -1,7 +1,7 @@
 import { User } from './user.entity';
 
-import { Transaction } from '@src/accounts/entities/transaction';
-import { Account } from '@src/accounts/entities/account.entity';
+import { Transaction } from '@src/application/account/entities/transaction.entity';
+import { Account } from '@src/application/account/entities/account.entity';
 
 describe('User', () => {
   it('should be able to create a User', () => {

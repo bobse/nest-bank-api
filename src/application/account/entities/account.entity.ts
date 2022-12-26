@@ -1,5 +1,5 @@
-import { Replace } from '../../helpers/Replace';
-import { ITransaction } from './transaction';
+import { Replace } from '../../../helpers/Replace';
+import { ITransaction } from './transaction.entity';
 
 export interface IAccount {
   id?: number;

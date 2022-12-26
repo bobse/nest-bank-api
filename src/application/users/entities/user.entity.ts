@@ -1,5 +1,5 @@
-import { Replace } from '../../helpers/Replace';
-import { Account } from '../../accounts/entities/account.entity';
+import { Replace } from '../../../helpers/Replace';
+import { Account } from '../../account/entities/account.entity';
 import { genSaltSync, hashSync, compareSync } from 'bcryptjs';
 
 export interface IUserData {

@@ -11,9 +11,8 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from '@src/auth/jwt.auth.guards';
-import { UserViewModel } from './user.viewmodel';
+import { UserViewModel } from './view_model/user.viewmodel';
 
 @Controller('users')
 export class UsersController {
@@ -23,11 +22,6 @@ export class UsersController {
   async create(@Body() createUserDto: CreateUserDto) {
     await this.usersService.create(createUserDto);
   }
-
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')

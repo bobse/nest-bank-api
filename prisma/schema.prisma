@@ -28,7 +28,7 @@ model Account {
   transactions Transaction[]
   createdAt    DateTime      @default(now())
 
-  @@unique([userId, id])
+  @@unique([userId, id], name: "accountIdUserId")
   @@index([userId])
 }
 

@@ -1,6 +1,7 @@
-import { Replace } from '../../helpers/Replace';
+import { Replace } from '../../../helpers/Replace';
 
 export interface ITransaction {
+  id?: number;
   accountId: number;
   description: string;
   date: Date;
@@ -8,11 +9,9 @@ export interface ITransaction {
 }
 
 export class Transaction {
-  private _id?: number;
   private data: ITransaction;
 
-  constructor(data: Replace<ITransaction, { date?: Date }>, id?: number) {
-    this._id = id;
+  constructor(data: Replace<ITransaction, { date?: Date }>) {
     this.data = { ...data, date: data.date ?? new Date() };
   }
   public get accountId() {
