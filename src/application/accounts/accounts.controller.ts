@@ -3,16 +3,14 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   UseGuards,
   Request,
-  HttpCode,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '@src/auth/jwt.auth.guards';
 import { AccountsService } from './accounts.service';
 import { CreateTransactiontDto } from './dto/create-transaction.dto';
+import { AccountStatementViewModel } from './view_model/account.viewmodel';
 
 @Controller('accounts')
 export class AccountsController {
@@ -27,8 +25,9 @@ export class AccountsController {
   @UseGuards(JwtAuthGuard)
   @Get(':id/statement')
   async getStatement(@Request() req, @Param('id') id: string) {
-    // TODO: create Mapper
-    return await this.accountsService.getStatement(req.user.id, +id);
+    return AccountStatementViewModel.toHTTP(
+      await this.accountsService.getStatement(req.user.id, +id),
+    );
   }
 
   @UseGuards(JwtAuthGuard)
