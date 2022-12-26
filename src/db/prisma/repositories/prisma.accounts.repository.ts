@@ -56,12 +56,6 @@ export class PrismaAccountsRepository implements AccountsRepository {
     userId: number,
     transaction: Transaction,
   ): Promise<void> {
-    if (!(await this.accountIsFromUser(userId, transaction.accountId))) {
-      throw new HttpException(
-        'Account does not belong to the user or is invalid',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
     await this.prisma.transaction.create({
       data: {
         accountId: transaction.accountId,
@@ -70,15 +64,6 @@ export class PrismaAccountsRepository implements AccountsRepository {
         amount: transaction.amount,
       },
     });
-  }
-
-  async accountIsFromUser(userId: number, accountId: number): Promise<boolean> {
-    const res = await this.prisma.account.findUnique({
-      where: {
-        accountIdUserId: { userId: userId, id: accountId },
-      },
-    });
-    return res ? true : false;
   }
 
   async getAllAccountsIdfromUserId(userId: number) {

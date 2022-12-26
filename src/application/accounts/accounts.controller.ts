@@ -19,14 +19,14 @@ export class AccountsController {
   @UseGuards(JwtAuthGuard)
   @Get(':id?/balance')
   async getBalance(@Request() req, @Param('id') id: string) {
-    return await this.accountsService.getBalance(req.user.id, +id);
+    return await this.accountsService.getBalance(req.user, +id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id/statement')
   async getStatement(@Request() req, @Param('id') id: string) {
     return AccountStatementViewModel.toHTTP(
-      await this.accountsService.getStatement(req.user.id, +id),
+      await this.accountsService.getStatement(req.user, +id),
     );
   }
 
@@ -36,9 +36,7 @@ export class AccountsController {
     @Request() req,
     @Body() createTransactionDTO: CreateTransactiontDto,
   ) {
-    await this.accountsService.newTransaction(
-      req.user.id,
-      createTransactionDTO,
-    );
+    console.log(req.user.accounts);
+    await this.accountsService.newTransaction(req.user, createTransactionDTO);
   }
 }
