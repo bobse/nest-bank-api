@@ -43,11 +43,22 @@ export class PrismaUserRepository implements UserRepository {
       data: {
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: User.encryptPassword(user.password),
         active: user.isActive(),
         accounts: {
           create: {},
         },
+      },
+    });
+  }
+
+  async updateLastLogin(userId: number): Promise<void> {
+    await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        lastLogin: new Date(),
       },
     });
   }

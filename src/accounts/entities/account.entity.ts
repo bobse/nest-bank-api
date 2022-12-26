@@ -14,6 +14,9 @@ export class Account {
   constructor(data: Replace<IAccount, { createdAt?: Date }>) {
     this.data = { ...data, createdAt: data.createdAt ?? new Date() };
   }
+  public get id() {
+    return this.data.id;
+  }
   public get transactions() {
     return this.data.transactions;
   }

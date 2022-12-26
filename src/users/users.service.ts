@@ -21,12 +21,20 @@ export class UsersService {
     }
   }
 
+  async findOneByEmail(email: string) {
+    return await this.userRepository.findByEmail(email);
+  }
+
+  async updateLastLogin(userId: number) {
+    return await this.userRepository.updateLastLogin(userId);
+  }
+
   findAll() {
     return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOneById(id: number) {
+    return await this.userRepository.findById(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

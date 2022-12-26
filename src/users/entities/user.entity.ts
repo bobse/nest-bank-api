@@ -24,14 +24,14 @@ export class User {
   ) {
     this.data = {
       ...data,
-      password: this.encryptPassword(data.password),
+      password: data.password,
       createdAt: data.createdAt ?? new Date(),
       lastLogin: data.lastLogin ?? null,
       active: data.active ?? true,
     };
   }
 
-  public encryptPassword(passwordPlain: string): string {
+  public static encryptPassword(passwordPlain: string): string {
     const salt = genSaltSync(10);
     const hashedPassword = hashSync(passwordPlain, salt);
     return hashedPassword;
