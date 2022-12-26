@@ -25,23 +25,23 @@ export class UsersService {
     return await this.userRepository.findByEmail(email);
   }
 
-  async updateLastLogin(userId: number) {
-    return await this.userRepository.updateLastLogin(userId);
-  }
-
-  findAll() {
-    return `This action returns all users`;
-  }
-
   async findOneById(id: number) {
     return await this.userRepository.findById(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async updateLastLogin(userId: number) {
+    return await this.userRepository.updateLastLogin(userId);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  // findAll() {
+  //   return `This action returns all users`;
+  // }
+
+  // update(id: number, updateUserDto: UpdateUserDto) {
+  //   return `This action updates a #${id} user`;
+  // }
+
+  // remove(id: number) {
+  //   return `This action removes a #${id} user`;
+  // }
 }
