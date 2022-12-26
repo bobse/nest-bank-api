@@ -1,7 +1,9 @@
-import { Replace } from '../helpers/Replace';
-import { Account } from './account';
+import { Replace } from '../../helpers/Replace';
+import { Account } from '../../accounts/entities/account.entity';
+import { genSaltSync, hashSync, compareSync } from 'bcryptjs';
 
 export interface IUserData {
+  id?: number;
   name: string;
   email: string;
   password: string;
@@ -10,28 +12,41 @@ export interface IUserData {
   active: boolean;
   accounts?: Account[];
 }
+
 export class User {
-  private _id?: number;
   private data: IUserData;
 
   constructor(
     data: Replace<
       IUserData,
-      { createdAt: Date; lastLogin: Date; active: boolean }
+      { createdAt?: Date | null; lastLogin?: Date | null; active?: boolean }
     >,
-    id?: number,
   ) {
-    this._id = id;
     this.data = {
       ...data,
+      password: this.encryptPassword(data.password),
       createdAt: data.createdAt ?? new Date(),
       lastLogin: data.lastLogin ?? null,
       active: data.active ?? true,
     };
   }
 
+  public encryptPassword(passwordPlain: string): string {
+    const salt = genSaltSync(10);
+    const hashedPassword = hashSync(passwordPlain, salt);
+    return hashedPassword;
+  }
+
+  public checkPassword(passwordPlain: string): boolean {
+    return compareSync(passwordPlain, this.data.password);
+  }
+
+  public get password(): string {
+    return this.data.password;
+  }
+
   public get id(): number | undefined {
-    return this._id;
+    return this.data.id;
   }
   public get name(): string {
     return this.data.name;
