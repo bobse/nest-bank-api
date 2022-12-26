@@ -4,9 +4,9 @@ import {
   Transaction as PrismaTransaction,
 } from '@prisma/client';
 import { Decimal } from '@prisma/client/runtime';
-import { Account } from '@src/application/account/entities/account.entity';
-import { Transaction } from '@src/application/account/entities/transaction.entity';
-import { IAccountBalance } from '@src/application/account/interfaces/balance.interface';
+import { Account } from '@src/application/accounts/entities/account.entity';
+import { Transaction } from '@src/application/accounts/entities/transaction.entity';
+import { IAccountBalance } from '@src/application/accounts/interfaces/balance.interface';
 
 export class PrismaAccountsMapper {
   // static toPrisma(user: User) {}

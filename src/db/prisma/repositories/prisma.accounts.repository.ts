@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { AccountsRepository } from '@src/application/account/accounts.repository';
-import { Account } from '@src/application/account/entities/account.entity';
-import { Transaction } from '@src/application/account/entities/transaction.entity';
-import { IAccountBalance } from '@src/application/account/interfaces/balance.interface';
-import { IAccountStatement } from '@src/application/account/interfaces/statement.interfaces';
+import { AccountsRepository } from '@src/application/accounts/accounts.repository';
+import { Account } from '@src/application/accounts/entities/account.entity';
+import { Transaction } from '@src/application/accounts/entities/transaction.entity';
+import { IAccountBalance } from '@src/application/accounts/interfaces/balance.interface';
+import { IAccountStatement } from '@src/application/accounts/interfaces/statement.interfaces';
 import { PrismaService } from '../prisma.service';
 import { PrismaAccountsMapper } from './prisma.accounts.mapper';
 

@@ -27,6 +27,7 @@ export class AccountsController {
   @UseGuards(JwtAuthGuard)
   @Get(':id/statement')
   async getStatement(@Request() req, @Param('id') id: string) {
+    // TODO: create Mapper
     return await this.accountsService.getStatement(req.user.id, +id);
   }
 
