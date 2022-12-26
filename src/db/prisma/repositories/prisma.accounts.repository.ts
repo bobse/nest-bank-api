@@ -33,6 +33,15 @@ export class PrismaAccountsRepository implements AccountsRepository {
         accountId: 'asc',
       },
     });
+    if (prismaBalance.length === 0) {
+      return accountIds.map((accountId) => {
+        return {
+          accountId: accountId,
+          date: new Date(),
+          totalBalance: 0,
+        };
+      });
+    }
     return PrismaAccountsMapper.balanceToDomain(prismaBalance);
   }
 
