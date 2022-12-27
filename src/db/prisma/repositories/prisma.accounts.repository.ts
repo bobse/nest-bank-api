@@ -1,9 +1,8 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AccountsRepository } from '@src/application/accounts/accounts.repository';
 import { Account } from '@src/application/accounts/entities/account.entity';
 import { Transaction } from '@src/application/accounts/entities/transaction.entity';
-import { IAccountBalance } from '@src/application/accounts/interfaces/balance.interface';
-import { IAccountStatement } from '@src/application/accounts/interfaces/statement.interfaces';
+import { HTTPAccountBalanceResponse } from '@src/application/accounts/view_model/account.viewmodel';
 import { PrismaService } from '../prisma.service';
 import { PrismaAccountsMapper } from './prisma.accounts.mapper';
 
@@ -14,7 +13,7 @@ export class PrismaAccountsRepository implements AccountsRepository {
   async getBalance(
     userId: number,
     accountId: number | undefined,
-  ): Promise<IAccountBalance[]> {
+  ): Promise<HTTPAccountBalanceResponse[]> {
     let accountIds: number[];
     if (!accountId) {
       accountIds = await this.getAllAccountsIdfromUserId(userId);

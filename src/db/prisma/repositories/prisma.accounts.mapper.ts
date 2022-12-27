@@ -6,7 +6,7 @@ import {
 import { Decimal } from '@prisma/client/runtime';
 import { Account } from '@src/application/accounts/entities/account.entity';
 import { Transaction } from '@src/application/accounts/entities/transaction.entity';
-import { IAccountBalance } from '@src/application/accounts/interfaces/balance.interface';
+import { HTTPAccountBalanceResponse } from '@src/application/accounts/view_model/account.viewmodel';
 
 export class PrismaAccountsMapper {
   // static toPrisma(user: User) {}
@@ -42,7 +42,7 @@ export class PrismaAccountsMapper {
         amount: Decimal | null;
       };
     })[],
-  ): IAccountBalance[] {
+  ): HTTPAccountBalanceResponse[] {
     return prismaBalance.map((account) => {
       return {
         accountId: account.accountId,

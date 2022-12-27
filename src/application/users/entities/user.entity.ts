@@ -10,7 +10,7 @@ export interface IUserData {
   createdAt: Date;
   lastLogin: Date | null;
   active: boolean;
-  accounts?: Account[];
+  accounts: Account[];
 }
 
 export class User {
@@ -19,7 +19,12 @@ export class User {
   constructor(
     data: Replace<
       IUserData,
-      { createdAt?: Date | null; lastLogin?: Date | null; active?: boolean }
+      {
+        accounts?: Account[];
+        createdAt?: Date | null;
+        lastLogin?: Date | null;
+        active?: boolean;
+      }
     >,
   ) {
     this.data = {
@@ -28,6 +33,7 @@ export class User {
       createdAt: data.createdAt ?? new Date(),
       lastLogin: data.lastLogin ?? null,
       active: data.active ?? true,
+      accounts: data.accounts ?? [],
     };
   }
 

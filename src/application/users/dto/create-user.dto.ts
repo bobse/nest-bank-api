@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, Matches, MinLength } from 'class-validator';
 
 // password REGEX
@@ -17,6 +18,11 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty({
+    required: true,
+    description:
+      'Password must contain 3 lowercase letter, 1 uppercase letter, 1 special character, and at least 8 characters in total',
+  })
   @IsNotEmpty()
   @Matches(
     RegExp(

@@ -1,9 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Account } from '../entities/account.entity';
 
 export class AccountStatementViewModel {
-  static toHTTP(account: Account) {
+  static toHTTP(account: Account): HTTPStatementResponse {
     return {
-      id: account.id,
+      accountId: account.id,
       date: new Date(),
       transactions: account.transactions.map((transaction) => {
         return {
@@ -14,4 +15,30 @@ export class AccountStatementViewModel {
       }),
     };
   }
+}
+
+class HTTPTransactionsResponse {
+  @ApiProperty()
+  date: Date;
+  @ApiProperty()
+  description: string;
+  @ApiProperty()
+  amount: number;
+}
+export class HTTPStatementResponse {
+  @ApiProperty({ type: Number })
+  accountId: number | undefined;
+  @ApiProperty({ type: Date })
+  date: Date;
+  @ApiProperty({ type: [HTTPTransactionsResponse] })
+  transactions: HTTPTransactionsResponse[];
+}
+
+export class HTTPAccountBalanceResponse {
+  @ApiProperty({ type: Number })
+  accountId: number;
+  @ApiProperty({ type: Number })
+  totalBalance: number;
+  @ApiProperty({ type: Date })
+  date: Date;
 }

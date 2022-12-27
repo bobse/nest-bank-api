@@ -1,13 +1,12 @@
 import { Account } from './entities/account.entity';
 import { Transaction } from './entities/transaction.entity';
-import { IAccountBalance } from './interfaces/balance.interface';
-import { IAccountStatement } from './interfaces/statement.interfaces';
+import { HTTPAccountBalanceResponse } from './view_model/account.viewmodel';
 
 export abstract class AccountsRepository {
   abstract getBalance(
     userId: number,
     accountId: number | undefined,
-  ): Promise<IAccountBalance[]>;
+  ): Promise<HTTPAccountBalanceResponse[]>;
 
   abstract getStatement(
     userId: number,
