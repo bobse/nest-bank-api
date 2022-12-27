@@ -26,14 +26,13 @@ The first choice in designing this archtecture was to separate the `User` from t
 - Install dependencies: `npm install`
 - Rename `.example.env` to `.env`
 - Start backend: `npm start`
-- Register user at `/users/register`
-- Login `/auth/login`
+- Register user at `api/users/register`
+- Login `api/auth/login`
 - Use token from Login to access:
-  - Retrieve your account Id `/users/profile`
-  - POST `/accounts/transaction` (Add transactions to your account)
-  - `/accounts/balance`
-  - `/accounts/balance`
-  - POST `/accounts/transaction` (Add transactions to your account)
+  - Retrieve your account Id `api/users/profile`
+  - POST `api/accounts/transaction` (Add transactions to your account)
+  - Balance: `api/accounts/balance` (all accounts) or `api/accounts/:id/balance`
+  - Statement: `api/accounts/:id/statement`
 
 ## API Documentation (Swagger):
 
