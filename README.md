@@ -23,8 +23,9 @@ The first choice in designing this archtecture was to separate the `User` from t
 ## How to run:
 
 - Start services: `docker-compose up -d`
-- Install dependencies: `npm install`
 - Rename `.example.env` to `.env`
+- Install dependencies: `npm install`
+- Migrate DB: `npx prisma migrate dev`
 - Start backend: `npm start`
 - Register user at `api/users/register`
 - Login `api/auth/login`
@@ -37,3 +38,12 @@ The first choice in designing this archtecture was to separate the `User` from t
 ## API Documentation (Swagger):
 
 - `/api/docs`
+
+## Tests
+
+Due to time constrains, only a few tests were implemented.
+`npm test`
+
+## DB Tools
+
+You can use pgadmin or `npx prisma studio` to check the database.
