@@ -12,8 +12,6 @@ Interview test from: https://github.com/4cadia-foundation/dev-test
 
 - Authentication: Passport using (email and password for login and JWT for access to protected routes)
 
-- Cache: Redis (When calculating the balance for the account, if we consider thousands of records in transactions, a cache implementation for `Balance` would speed up responses.)
-
 - Container: Docker-compose
 
 ## DB Architecture:
@@ -35,15 +33,28 @@ The first choice in designing this archtecture was to separate the `User` from t
   - Balance: `api/accounts/balance` (all accounts) or `api/accounts/:id/balance`
   - Statement: `api/accounts/:id/statement`
 
+<br/>
+
 ## API Documentation (Swagger):
 
 - `/api/docs`
+
+<br/>
 
 ## Tests
 
 Due to time constrains, only a few tests were implemented.
 `npm test`
 
+<br/>
+
 ## DB Tools
 
 You can use pgadmin or `npx prisma studio` to check the database.
+
+<br/>
+
+## Improvements to be implemented in the future:
+
+- Cache: Redis (When calculating the balance for the account, if we consider thousands of records in transactions, a cache implementation for `Balance` would speed up responses.)
+- Paginated responses for transactions
